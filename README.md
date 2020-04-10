@@ -3,9 +3,9 @@ Tools for simplifying the use of [ImmersiveSoundSpace](https://github.com/numedi
 
 
 ## License
-Copyright (c) 2017-2020 [UMONS](https://web.umons.ac.be/en/) - [numediart](https://web.umons.ac.be/numediart/fr/accueil/) - [CLICK'](http://www.clicklivinglab.org/)
+Copyright (c) 2020 [UMONS](https://web.umons.ac.be/en/) - [numediart](https://web.umons.ac.be/numediart/fr/accueil/) - [CLICK'](http://www.clicklivinglab.org/)
  
-*ConnectedScenicObject* is free software; you can redistribute it and/or
+*ISS_Utils* is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
 version 2.1 of the License, or (at your option) any later version.
