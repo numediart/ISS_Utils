@@ -20,6 +20,7 @@ import netP5.*;
 import java.util.Map;
 
 OscP5 oscP5;
+final int oscPort = 9001;
 
 final int TIMEOUT = 2000; // (milliseconds) after how long without message the trackers are removed from hashmap
 IntList messagesT0;
@@ -30,7 +31,7 @@ HashMap<String, ViveTrackerPose> trackers;
 void setup() {
   size(1200, 540);
 
-  oscP5 = new OscP5(this, 9001);
+  oscP5 = new OscP5(this, oscPort);
   
   messagesT0 = new IntList();
   trackers = new HashMap<String, ViveTrackerPose>();

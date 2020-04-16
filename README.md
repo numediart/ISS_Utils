@@ -1,6 +1,8 @@
 # ISS Utils
 Tools for simplifying the use of [ImmersiveSoundSpace](https://github.com/numediart/ImmersiveSoundSpace)
 
+The information needed to install and run the tools are given in each folder readme.
+
 
 ## License
 Copyright (c) 2020 [UMONS](https://web.umons.ac.be/en/) - [numediart](https://web.umons.ac.be/numediart/fr/accueil/) - [CLICK'](http://www.clicklivinglab.org/)
