@@ -26,7 +26,7 @@ Check the print log at the bottom of the Processing window to see if there is an
 
 If trackers are found, the window will look like this (below is the output of HTCTrackerPositionSender script) :  
 ![Trackers displayed](screenshots/trackers.png)  
-- The first line gives the number of received messages per second. In that case, the framerate of the HTCTrackerPositionSender script is set to 30 but as there are 3 trackers and a message is sent for eache tracker, it is normal to find about 90 messages per second.
+- The first line gives the number of received messages per second. In that case, the framerate of the HTCTrackerPositionSender script is set to 30 but as there are 3 trackers and a message is sent for each tracker, it is normal to find about 90 messages per second.
 - For each tracker, the serial id is displayed at the top and the coordinates (in meters, relative to the calibrated origin) are displayed below.
 
 Due to the space available on the display, it is possible to display 12 trackers, which might be enough for most of applications but if you need to display more, resize the window with the `size(width, height)` function at the begining of `setup()`. The trackers will display on a zone which is 200 pixels wide by (half of the program window height - 20).
