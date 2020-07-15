@@ -71,7 +71,7 @@ void draw() {
     }
   }
   
-  float valPerSecond = -1;
+  float valPerSecond = 0;
   if(messagesT0.size() > 1) {
     synchronized(messagesT0) {
       valPerSecond = messagesT0.size() * 1000.0 / (messagesT0.get(messagesT0.size() - 1) - messagesT0.get(0));
@@ -80,7 +80,7 @@ void draw() {
       }
     }
   }
-  text("values per second : " + nf(valPerSecond, 0, 2), 20, 20);
+  text("values per second : " + (valPerSecond > 0? nf(valPerSecond, 0, 2) : "none"), 20, 20);
 }
 
 
