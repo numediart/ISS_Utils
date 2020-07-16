@@ -13,7 +13,7 @@ Tools for simplifying the use of [ImmersiveSoundSpace](https://github.com/numedi
 
 The details on how to use the programs are given in each folder readme.
 
-Alternatively, If you don't want to install Processing, you can download the Windows executables from the [release page]().
+Alternatively, If you don't want to install Processing, you can download the Windows executables from the [release page](https://github.com/numediart/ISS_Utils/releases).
 
 ## License
 Copyright (c) 2020 [UMONS](https://web.umons.ac.be/en/) - [numediart](https://web.umons.ac.be/numediart/fr/accueil/) - [CLICK'](http://www.clicklivinglab.org/)
