@@ -1,11 +1,29 @@
+// Copyright (c) 2020 UMONS - numediart - CLICK'
+// 
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+// 
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+
 import oscP5.*;
 import netP5.*;
 import controlP5.*;
 import java.util.*;
 
 OscP5 oscP5;
+int oscPort = 9001;
+
 ControlP5 cp5;
-final int oscPort = 9001;
 ScrollableList trackerList;
 
 StringList trackerSerials;
@@ -41,6 +59,28 @@ void setup() {
   statusText = "ready to receive OSC on port " + oscPort;
   cp5 = new ControlP5(this);
   cp5.setColor(ControlP5.THEME_GREY);
+    cp5.addTextfield("osc_port")
+     .setPosition(width-180-200, 0)
+     .setSize(60, 2 * helpTextSize)
+     .setText(""+oscPort)
+     .setFont(createFont("arial", 12))
+     .getCaptionLabel()
+       .setColor(255)
+       .align(ControlP5.LEFT_OUTSIDE, ControlP5.CENTER)
+       .toUpperCase(false)
+       .setText("OSC Port")
+       .getStyle()
+         .setPaddingLeft(-10)     
+     ;
+  cp5.addBang("changePort")
+     .setPosition(width - 80 - 200, 0)
+     .setSize(60, 2 * helpTextSize)
+     .setFont(createFont("arial", 12))
+     .getCaptionLabel()
+       .align(ControlP5.CENTER, ControlP5.CENTER)
+       .toUpperCase(false)
+       .setText("Change")
+     ;   
   trackerList = cp5.addScrollableList("tracker_to_follow")
      .setPosition(width-200, 0)
      .setSize(200, 100)
@@ -65,6 +105,26 @@ void setup() {
 }
 
 
+public void changePort() {
+  if(isWriting) {
+    System.err.println("Impossible to change port while recording");
+    return;
+  }
+  int oscPortTemp = int(cp5.get(Textfield.class,"osc_port").getText());
+  if(oscPortTemp >= 1024 && oscPortTemp <= 65536) {
+    oscPort = oscPortTemp;
+    oscP5.stop();
+    oscP5 = new OscP5(this, oscPort);
+    println("Now listening port " + oscPort + " for incomming OSC messages");
+    statusText = "Now listening port " + oscPort + " for incomming OSC messages";
+  }
+  else {
+    System.err.println("The OSC port must be betwen 1024 and 65536");
+    cp5.get(Textfield.class,"osc_port").setText("" + oscPort);
+    statusText = "Now listening port " + oscPort + " for incomming OSC messages";
+  }
+}
+
 
 void tracker_to_follow(int n) {
   trackerToRecord = trackerSerials.get(n);
@@ -83,11 +143,16 @@ void draw() {
   fill(statusTextColor);
   int xOffset = 10;
   int statusTextW = ceil(textWidth(statusText)) + 20;
-  xOffset -= frameCount % statusTextW;
-  int textInstanceX = xOffset;
-  while(textInstanceX < width) {
-    text(statusText + " | ", textInstanceX, height - helpTextSize * 0.5);
-    textInstanceX += statusTextW;
+  if(statusTextW > width) {
+    xOffset -= frameCount % statusTextW;
+    int textInstanceX = xOffset;
+    while(textInstanceX < width) {
+      text(statusText + " | ", textInstanceX, height - helpTextSize * 0.5);
+      textInstanceX += statusTextW;
+    }
+  }
+  else {
+    text(statusText, 10, height - helpTextSize * 0.5);
   }
   
   if(showHelp) {
@@ -114,10 +179,30 @@ void draw() {
     text("Press 'h' for help", 10, y);
   }
   
+  pushStyle();
   fill(255);
   int elapsedRecording = isWriting? millis() - writeT0 : recordTime;
-  text(timeString(elapsedRecording), 10, height - (1.8 * helpTextSize));
-  
+  String elapsedTimeString = timeString(elapsedRecording);
+  textAlign(LEFT, CENTER);
+  textSize(1.4*helpTextSize);
+  int timeStringY = height - round(2.8 * helpTextSize);
+  text(elapsedTimeString, 10, timeStringY);
+  int recordIconX = 10 + round(textWidth(elapsedTimeString)) + 20;
+  stroke(255);
+  fill(255, 128);
+  rectMode(CENTER);
+  rect(recordIconX, timeStringY, 20, 20, 4);
+  if(isWriting) {
+    fill(255, 0, 0);
+    ellipse(recordIconX, timeStringY, 12, 12);
+  }
+  else {
+    fill(255);
+    noStroke();
+    rect(recordIconX - 4, timeStringY, 4, 14);
+    rect(recordIconX + 4, timeStringY, 4, 14);
+  }
+  popStyle();
   
   // draw ground grid
   pushMatrix();
