@@ -304,6 +304,7 @@ void fileSelected(File selection) {
   } else {
     println("Tracker path will be saved to " + selection.getAbsolutePath());
     writer = createWriter(selection.getAbsolutePath());
+    recordTime = 0;
     statusTextColor = color(0);
     statusText = "Tracker path will be saved to " + selection.getAbsolutePath();
   }
