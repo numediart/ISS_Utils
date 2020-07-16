@@ -1,8 +1,19 @@
 # ISS Utils
 Tools for simplifying the use of [ImmersiveSoundSpace](https://github.com/numediart/ImmersiveSoundSpace)
 
-The information needed to install and run the tools are given in each folder readme.
+## Requirements
+- [Processing IDE](https://processing.org/download/) (Java mode)
+- [oscP5 library](https://github.com/sojamo/oscp5) and [ControlP5](https://github.com/sojamo/controlp5/) installed from library manager
+    - Open Processing
+    - Click on Sketch -> Import Library... -> Add Library...
+    - In the *Filter* field, type *oscp5*
+    - Select either "**oscP5 |** An Open Sound Control (OSC) implementation." or "**ControlP5 |** A GUI library to build custom user interfaces..."
+    - Click *Install* button
+- [ImmersiveSoundSpace](https://github.com/numediart/ImmersiveSoundSpace) installed and **running**
 
+The details on how to use the programs are given in each folder readme.
+
+Alternatively, If you don't want to install Processing, you can download the Windows executables from the [release page]().
 
 ## License
 Copyright (c) 2020 [UMONS](https://web.umons.ac.be/en/) - [numediart](https://web.umons.ac.be/numediart/fr/accueil/) - [CLICK'](http://www.clicklivinglab.org/)

@@ -1,16 +1,6 @@
 # OSC Listener Processing
 A tool to check OSC messages are sent from [HTCTrackerPositionSender script](https://github.com/numediart/ImmersiveSoundSpace/tree/master/Tracking) and display currently tracked Trackers.
 
-## Requirements
-- [Processing IDE](https://processing.org/download/) (Java mode)
-- [oscP5 library](https://github.com/sojamo/oscp5) installed from library manager
-    - Open Processing
-    - Click on Sketch -> Import Library... -> Add Library...
-    - In the *Filter* field, type *oscp5*
-    - Select "**oscP5 |** An Open Sound Control (OSC) implementation."
-    - Click *Install* button
-- [ImmersiveSoundSpace](https://github.com/numediart/ImmersiveSoundSpace) installed and **running**
-
 ## How to use
 - Open *OSCListenerProcessing.pde*
 - Set the OSC port to listen @ line 23 (same port as the one defined by `--listeners` argument when launching Tracking script) :  

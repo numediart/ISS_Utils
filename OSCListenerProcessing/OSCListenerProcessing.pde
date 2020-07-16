@@ -17,10 +17,14 @@
 
 import oscP5.*;
 import netP5.*;
+import controlP5.*;
 import java.util.Map;
 
 OscP5 oscP5;
-final int oscPort = 9001;
+int oscPort = 9001;
+
+ControlP5 cp5;
+
 
 final int TIMEOUT = 2000; // (milliseconds) after how long without message the trackers are removed from hashmap
 IntList messagesT0;
@@ -33,6 +37,32 @@ void setup() {
 
   oscP5 = new OscP5(this, oscPort);
   
+  cp5 = new ControlP5(this);
+  //cp5.setColor(ControlP5.THEME_GREY);
+  cp5.addTextfield("osc_port")
+     .setPosition(width-180, 0)
+     .setSize(60, 20)
+     .setText(""+oscPort)
+     .setFont(createFont("arial", 12))
+     .getCaptionLabel()
+       .align(ControlP5.LEFT_OUTSIDE, ControlP5.CENTER)
+       .toUpperCase(false)
+       .setText("OSC Port")
+       .getStyle()
+         .setPaddingLeft(-10)     
+     ;
+  cp5.addBang("changePort")
+     .setPosition(width - 80, 0)
+     .setSize(60, 20)
+     .setFont(createFont("arial", 12))
+     .getCaptionLabel()
+       .align(ControlP5.CENTER, ControlP5.CENTER)
+       .toUpperCase(false)
+       .setText("Change")
+     ;    
+     
+  println("Now listening port " + oscPort + " for incomming OSC messages");
+  
   messagesT0 = new IntList();
   trackers = new HashMap<String, ViveTrackerPose>();
   
@@ -40,6 +70,23 @@ void setup() {
   textSize(18);
   delay(500);
 }
+
+
+
+public void changePort() {
+  int oscPortTemp = int(cp5.get(Textfield.class,"osc_port").getText());
+  if(oscPortTemp >= 1024 && oscPortTemp <= 65536) {
+    oscPort = oscPortTemp;
+    oscP5.stop();
+    oscP5 = new OscP5(this, oscPort);
+    println("Now listening port " + oscPort + " for incomming OSC messages");
+  }
+  else {
+    System.err.println("The OSC port must be betwen 1024 and 65536");
+    cp5.get(Textfield.class,"osc_port").setText("" + oscPort);
+  }
+}
+
 
 
 void draw() {
