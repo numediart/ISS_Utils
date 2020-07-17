@@ -6,7 +6,7 @@ Tools for simplifying the use of [ImmersiveSoundSpace](https://github.com/numedi
 - [oscP5 library](https://github.com/sojamo/oscp5) and [ControlP5](https://github.com/sojamo/controlp5/) installed from library manager
     - Open Processing
     - Click on Sketch -> Import Library... -> Add Library...
-    - In the *Filter* field, type *oscp5*
+    - In the *Filter* field, type *oscp5* or *controlp5*
     - Select either "**oscP5 |** An Open Sound Control (OSC) implementation." or "**ControlP5 |** A GUI library to build custom user interfaces..."
     - Click *Install* button
 - [ImmersiveSoundSpace](https://github.com/numediart/ImmersiveSoundSpace) installed and **running**
