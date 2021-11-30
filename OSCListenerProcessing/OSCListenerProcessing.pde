@@ -127,7 +127,7 @@ void draw() {
       }
     }
   }
-  text("values per second : " + (valPerSecond > 0? nf(valPerSecond, 0, 2) : "none"), 20, 20);
+  text("values per second : " + (valPerSecond > 0 && trackers.size() > 0? nf(valPerSecond/trackers.size(), 0, 2) : "none"), 20, 20);
 }
 
 
@@ -148,5 +148,4 @@ void oscEvent(OscMessage msg) {
       trackers.put(serial, new ViveTrackerPose(msg.arguments()));
     }
   }
-  //msg.print();
 }

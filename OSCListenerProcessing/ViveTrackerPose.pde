@@ -25,18 +25,9 @@ public class ViveTrackerPose {
   
   
   public ViveTrackerPose(Object[] oscArguments) {
-    if(oscArguments.length == 8) {
-      serial = (String)oscArguments[0];
-      x = (float)oscArguments[1];
-      y = (float)oscArguments[2];
-      z = (float)oscArguments[3];
-      qx = (float)oscArguments[4];
-      qy = (float)oscArguments[5];
-      qz = (float)oscArguments[6];
-      qw = (float)oscArguments[7];
-    }
     pg = createGraphics(200, (height - 20)/2);
-    lastUpdate = millis();
+    serial = (String)oscArguments[0];
+    update(oscArguments);
   }
   
   
