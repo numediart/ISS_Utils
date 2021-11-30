@@ -28,6 +28,7 @@ ControlP5 cp5;
 
 final int TIMEOUT = 2000; // (milliseconds) after how long without message the trackers are removed from hashmap
 IntList messagesT0;
+final int FILTER_SIZE = 200;
 HashMap<String, ViveTrackerPose> trackers;
 
 
@@ -119,15 +120,16 @@ void draw() {
   }
   
   float valPerSecond = 0;
-  if(messagesT0.size() > 1) {
+  if(messagesT0.size() > 2) {
     synchronized(messagesT0) {
-      valPerSecond = messagesT0.size() * 1000.0 / (messagesT0.get(messagesT0.size() - 1) - messagesT0.get(0));
-      if((loopTime - messagesT0.get(messagesT0.size() - 1)) > 5000) {
+      int nbMes = messagesT0.size();
+      valPerSecond = nbMes * 1000.0f / (messagesT0.get(nbMes-1) - messagesT0.get(0));
+      if((loopTime - messagesT0.get(nbMes - 1)) > 2000) {
          messagesT0.clear();
       }
     }
   }
-  text("values per second : " + (valPerSecond > 0 && trackers.size() > 0? nf(valPerSecond/trackers.size(), 0, 2) : "none"), 20, 20);
+  text("values per second : " + (valPerSecond > 0 && trackers.size() > 0? round(valPerSecond)/trackers.size() : "none"), 20, 20);
 }
 
 
@@ -135,7 +137,7 @@ void draw() {
 void oscEvent(OscMessage msg) {
   synchronized(messagesT0) {
     messagesT0.append(millis());
-    if(messagesT0.size() > 50) {
+    if(messagesT0.size() > FILTER_SIZE) {
       messagesT0.remove(0);
     }
   }
